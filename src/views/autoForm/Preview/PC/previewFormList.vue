@@ -159,8 +159,8 @@
 </template>
 
 <script>
-  import UpLoad from '../../../components/UPLOAD'
-  import Organization from '../../../components/organization'
+  import UpLoad from '../../../../components/UPLOAD'
+  import Organization from '../../../../components/organization'
   export default {
     props: {
       item: {

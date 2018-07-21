@@ -4,7 +4,7 @@
 const autoForm = {
   state: {
     form:{
-      formName : '',
+      formName : '表单',
       inline: false, // 是否使用inline排版
       labelWidth: '80px', // 标签宽度
       size: 'small', // 尺寸

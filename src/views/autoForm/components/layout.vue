@@ -31,6 +31,6 @@
 
 <style scoped lang="scss">
   .item{
-    margin: 5px;
+    margin: 10px;
   }
 </style>

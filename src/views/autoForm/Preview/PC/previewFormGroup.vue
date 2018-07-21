@@ -3,7 +3,7 @@
     <el-form-item :label="item.formItemList[colIndex].label" :required="item.formItemList[colIndex].required">
       <!--文本-->
       <el-input
-        v-if="item.formItemList[colIndex].type==='input'||item.formItemList[colIndex].type==='richtext'"
+        v-if="item.formItemList[colIndex].type==='input'"
         :type="item.formItemList[colIndex].subtype||'textarea'"
         :placeholder="item.formItemList[colIndex].placeholder"
         :autosize="item.formItemList[colIndex].autosize"
@@ -171,8 +171,8 @@
 </template>
 
 <script>
-  import UpLoad from '../../../components/UPLOAD'
-  import Organization from '../../../components/organization'
+  import UpLoad from '../../../../components/UPLOAD'
+  import Organization from '../../../../components/organization'
   export default {
     props: {
       item: {

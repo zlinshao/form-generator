@@ -19,7 +19,7 @@
                 <div style="display: flex;">
                   <div class="head">
                     <img v-if="item.avatar" :src="item.avatar">
-                    <img v-else="" src="../../assets/images/defaultHead.png">
+                    <img v-else="" src="../assets/images/defaultHead.png">
                   </div>
                   <div class="infoBox">
                     <div class="info">{{item.name}}</div>
@@ -60,7 +60,7 @@
                     <div>
                       <div class="head">
                         <img v-if="item.avatar" :src="item.avatar">
-                        <img v-else="" src="../../assets/images/head.jpg">
+                        <img v-else="" src="../assets/images/head.jpg">
                         <!--对号-->
                         <span class="el-icon-check" v-if="selectIdMember.indexOf(item.id)>-1"></span>
                         <!--遮罩-->
@@ -544,7 +544,7 @@
                   padding: 5px 0;
                 }
                 .breadcrumb-wrapper{
-                  height: 383px;
+                  height: 407px;
                   overflow: auto;
                   .breadcrumb{
                     padding: 0 15px;

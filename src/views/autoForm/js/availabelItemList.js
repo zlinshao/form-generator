@@ -14,6 +14,7 @@ export default {
     "value": '',
     "min": 0,
     "max": 99998,
+    "placeholder": '请输入数字',
   },
   "switch": {
     "type": 'switch',

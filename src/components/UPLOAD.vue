@@ -20,7 +20,7 @@
 </template>
 
 <script>
-  import fileImage from '../../assets/images/file.png'
+  import fileImage from '../assets/images/file.png'
 
   export default {
     name: 'hello',

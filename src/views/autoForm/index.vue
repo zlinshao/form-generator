@@ -2,6 +2,7 @@
   <div id="autoForm">
     <div style="height: 100%">
       <div style="height: 5%;text-align: right">
+        <el-button type="primary" size="mini" @click="viewInMobile">手 机</el-button>
         <el-button type="primary" size="mini" @click="previewForm">预 览</el-button>
         <el-button type="primary" size="mini">确 定</el-button>
       </div>
@@ -124,7 +125,7 @@
     },
     methods:{
       setHeight(){
-        let height_ = $(window).height() - 141;
+        let height_ = $(window).height() - 21;
         $('#autoForm').height(height_);
       },
       addItem(val){
@@ -151,7 +152,10 @@
       },
       previewForm(){
         this.$router.push('/preview')
-      }
+      },
+      viewInMobile(){
+        this.$router.push('/viewInMobile')
+      },
     },
   }
 </script>

@@ -141,8 +141,8 @@
 </template>
 
 <script>
-  import UpLoad from '../../components/common/UPLOAD'
-  import Staff from '../../components/common/organization'
+  import UpLoad from '../../../components/UPLOAD'
+  import Staff from '../../../components/organization'
   export default {
     props: {
       item: {
