@@ -37,11 +37,10 @@
 
 <script>
   import PC from './PC/preview'
-  import Mobile from './mobile/index'
 
   export default {
     name: "index",
-    components: {PC,Mobile},
+    components: {PC},
     data(){
       return{
         type : 'pc',
