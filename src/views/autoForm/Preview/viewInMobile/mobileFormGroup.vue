@@ -1,95 +1,95 @@
 <template>
   <div>
     <van-field
-        v-if="item.type==='input' || item.type==='number'"
-        :label="item.label"
-        :required="item.required"
-        :placeholder="item.placeholder"
-        v-model="item.value"
-        :value="item.value"
-        :disabled="item.disabled"
-        :type="item.subtype">
+        v-if="item.formItemList[colIndex].type==='input' || item.formItemList[colIndex].type==='number'"
+        :label="item.formItemList[colIndex].label"
+        :required="item.formItemList[colIndex].required"
+        :placeholder="item.formItemList[colIndex].placeholder"
+        v-model="item.value[rowIndex][colIndex]"
+        :value="item.value[rowIndex][colIndex]"
+        :disabled="item.formItemList[colIndex].disabled"
+        :type="item.formItemList[colIndex].subtype">
     </van-field>
     <van-switch-cell
-        v-else-if="item.type==='switch'"
-        :title="item.label"
+        v-else-if="item.formItemList[colIndex].type==='switch'"
+        :title="item.formItemList[colIndex].label"
         size="22px"
-        v-model="item.value"
-        :value="item.value"
-        :disabled="item.disabled">
+        v-model="item.value[rowIndex][colIndex]"
+        :value="item.value[rowIndex][colIndex]"
+        :disabled="item.formItemList[colIndex].disabled">
     </van-switch-cell>
 
     <van-field
-        v-else-if="item.type==='select'"
-        :label="item.label"
-        :required="item.required"
+        v-else-if="item.formItemList[colIndex].type==='select'"
+        :label="item.formItemList[colIndex].label"
+        :required="item.formItemList[colIndex].required"
         v-model="item.text"
         placeholder="请选择"
         @click="openSelect"
         readonly>
     </van-field>
 
-    <div v-else-if="item.type==='checkbox'">
-      <div class="paddingTitle">{{item.label}}</div>
+    <div v-else-if="item.formItemList[colIndex].type==='checkbox'">
+      <div class="paddingTitle">{{item.formItemList[colIndex].label}}</div>
       <div class="checkCss">
-        <van-checkbox-group v-model="item.value">
+        <van-checkbox-group v-model="item.value[rowIndex][colIndex]">
           <van-checkbox
-              v-for="o in item.options"
+              v-for="o in item.formItemList[colIndex].options"
               :key="o.value"
               :name="o.value">
-            {{item.label}}
+            {{item.formItemList[colIndex].label}}
           </van-checkbox>
         </van-checkbox-group>
       </div>
     </div>
 
-    <div v-else-if="item.type === 'radio'">
-      <div class="paddingTitle">{{item.label}}</div>
+    <div v-else-if="item.formItemList[colIndex].type === 'radio'">
+      <div class="paddingTitle">{{item.formItemList[colIndex].label}}</div>
       <div class="checkCss">
-        <van-radio-group v-model="item.value">
+        <van-radio-group v-model="item.value[rowIndex][colIndex]">
           <van-radio
-              v-for="o in item.options"
+              v-for="o in item.formItemList[colIndex].options"
               :key="o.value"
               :name="o.value">
-            {{item.label}}
+            {{item.formItemList[colIndex].label}}
           </van-radio>
         </van-radio-group>
       </div>
     </div>
 
     <van-field
-        v-else-if="item.type==='date'"
-        :label="item.label"
-        :required="item.required"
-        v-model="item.value"
+        v-else-if="item.formItemList[colIndex].type==='date'"
+        :label="item.formItemList[colIndex].label"
+        :required="item.formItemList[colIndex].required"
+        v-model="item.value[rowIndex][colIndex]"
         placeholder="请选择"
         @click="openDate"
         readonly>
     </van-field>
 
-    <div class="aloneModel" v-else-if="item.type === 'upload'">
+    <div class="aloneModel" v-else-if="item.formItemList[colIndex].type === 'upload'">
       <div class="title">领导同意截图</div>
-      <UpLoad :ID="item.domId" @getImg="getImg"></UpLoad>
-    </div>
-
-    <div v-else-if="item.type==='rate'" style="padding: 10px 15px;font-size: 14px;color: #333">
-      <div style="display: inline-block;width:90px">
-        {{item.label}}
-      </div>
-      <div style="display: inline-block">
-        <van-rate v-model="item.value" />
-      </div>
+      <UpLoad :ID="item.formItemList[colIndex].domId" @getImg="getImg"></UpLoad>
     </div>
 
     <van-field
-        v-else-if="item.type==='staff'"
+        v-else-if="item.formItemList[colIndex].type==='staff'"
         v-model="item.valueName"
         @click="openModal()"
-        :label="item.label"
+        :label="item.formItemList[colIndex].label"
         readonly
         type="text"
         placeholder="请点击选择">
     </van-field>
+
+    <div v-else-if="item.formItemList[colIndex].type==='rate'" style="padding: 10px 15px;font-size: 14px;color: #333">
+      <div style="display: inline-block;width:90px">
+        {{item.formItemList[colIndex].label}}
+      </div>
+      <div style="display: inline-block">
+        <van-rate v-model="item.value[rowIndex][colIndex]" />
+      </div>
+    </div>
     <van-popup :overlay-style="{'background':'rgba(0,0,0,.2)'}" v-model="selectShow_user" position="bottom" :overlay="true">
       <van-picker
           show-toolbar
@@ -98,6 +98,7 @@
           @cancel="onCancel"
           @confirm="onConfirm"/>
     </van-popup>
+
     <van-popup :overlay-style="{'background':'rgba(0,0,0,.2)'}" v-model="selectShow_online" position="bottom" :overlay="true">
       <van-picker
           show-toolbar
@@ -110,8 +111,8 @@
     <!--日期-->
     <van-popup :overlay-style="{'background':'rgba(0,0,0,.2)'}" v-model="timeShow" position="bottom" :overlay="true">
       <van-datetime-picker
-          type="date"
           v-model="currentDate"
+          type="date"
           :min-date="minDate"
           :max-date="maxDate"
           @change="monthDate"
@@ -132,6 +133,14 @@
         type: Object,
         required: true,
       },
+      rowIndex: {
+        type: Number,
+        required: true,
+      },
+      colIndex: {
+        type: Number,
+        required: true,
+      }
     },
     data(){
       return{
@@ -147,12 +156,12 @@
     },
     methods:{
       openSelect(){
-        if(this.item.optionsUrl){
+        if(this.item.formItemList[this.colIndex].optionsUrl){
           this.selectShow_online = true;
         }else {
           this.selectShow_user = true;
         }
-        this.columns = this.item.options;
+        this.columns = this.item.formItemList[this.colIndex].options;
       },
       onCancel(){
         this.selectShow_user = false;
@@ -160,7 +169,7 @@
         this.timeShow = false;
       },
       onConfirm(val){
-        this.item.value = this.item.optionsUrl? val.id : val.value;
+        this.item.value[this.rowIndex][this.colIndex] = this.item.optionsUrl? val.id : val.value;
         this.item.text = this.item.optionsUrl? val.dictionary_name : val.label;
         this.selectShow_user = false;
         this.selectShow_online = false;
@@ -172,12 +181,12 @@
         this.dateFormat = peaker.getValues().join('-');
       },
       onDate(peaker){
-        this.item.value = this.dateFormat;
+        this.item.value[this.rowIndex][this.colIndex] = this.dateFormat;
         this.timeShow = false;
       },
       //get image array
       getImg(val){
-        this.item.value = val[1];
+        this.item.value[this.rowIndex][this.colIndex] = val[1];
       },
 
       openModal(){
@@ -212,9 +221,7 @@
       padding: 10px 15px;
     }
   }
-  .van-cell{
-    line-height: 24px;
-  }
+
   .aloneModel.required {
     .title {
       padding-left: .2rem;
@@ -222,5 +229,8 @@
         color: #f44;
       }
     }
+  }
+  .van-cell{
+    line-height: 24px;
   }
 </style>

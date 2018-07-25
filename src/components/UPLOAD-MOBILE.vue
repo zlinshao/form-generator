@@ -4,7 +4,7 @@
       <div :id="'pickfiles'+ID" class="pickfiles">
         <div class="imgItem" v-for="(val,key) in editImg" v-if="editImg.length > 0">
           <div style=" position: relative;">
-            <img v-if="val.is_video" src="../../assets/video.jpg" style="width: 1.5rem; height: 1.5rem;">
+            <img v-if="val.is_video" src="../assets/images/video.jpg" style="width: 1.5rem; height: 1.5rem;">
             <img :src="val.uri" style="width: 1.5rem; height: 1.5rem;" v-else>
             <div class="progress"><b style="color: #fff !important;"></b></div>
             <div class="remove pic_delete van-icon van-icon-close" @click="deleteImage(key)">
@@ -20,7 +20,7 @@
 </template>
 
 <script>
-  import fileImage from '../../assets/video.jpg'
+  import fileImage from '../assets/images/video.jpg'
   import {Dialog} from 'vant';
   import {Toast} from 'vant';
 
