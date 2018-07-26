@@ -83,13 +83,24 @@
 
     <van-field
         v-else-if="item.type==='staff'"
-        v-model="item.valueName"
-        @click="openModal()"
+        v-model="valueName"
+        @click="staffShow = true"
         :label="item.label"
         readonly
         type="text"
         placeholder="请点击选择">
     </van-field>
+
+    <van-field
+        v-else-if="item.type==='depart'"
+        v-model="valueName"
+        @click="departShow = true"
+        :label="item.label"
+        readonly
+        type="text"
+        placeholder="请点击选择">
+    </van-field>
+
     <van-popup :overlay-style="{'background':'rgba(0,0,0,.2)'}" v-model="selectShow_user" position="bottom" :overlay="true">
       <van-picker
           show-toolbar
@@ -98,6 +109,7 @@
           @cancel="onCancel"
           @confirm="onConfirm"/>
     </van-popup>
+
     <van-popup :overlay-style="{'background':'rgba(0,0,0,.2)'}" v-model="selectShow_online" position="bottom" :overlay="true">
       <van-picker
           show-toolbar
@@ -118,15 +130,25 @@
           @cancel="onCancel"
           @confirm="onDate"/>
     </van-popup>
+
+    <van-popup :overlay-style="{'background':'rgba(255,255,255,1)'}" v-model="departShow" position="right" :close-on-click-overlay="false">
+      <MobileDepart @selectDepart="selectDepart"></MobileDepart>
+    </van-popup>
+
+    <van-popup :overlay-style="{'background':'rgba(255,255,255,1)'}" v-model="staffShow" position="right" :close-on-click-overlay="false">
+      <MobileStaff @selectStaff="selectStaff"></MobileStaff>
+    </van-popup>
   </div>
 </template>
 
 <script>
   import UpLoad from '../../../../components/UPLOAD-MOBILE'
+  import MobileDepart from '../../../../components/mobile-depart'
+  import MobileStaff from '../../../../components/mobile-staff'
 
   export default {
     name: "mobileFormList",
-    components: {UpLoad},
+    components: {UpLoad , MobileDepart , MobileStaff},
     props: {
       item: {
         type: Object,
@@ -137,6 +159,8 @@
       return{
         selectShow_user : false,
         selectShow_online : false,
+        departShow : false,
+        staffShow : false,
         timeShow : false,
         columns : [],
         currentDate : '',
@@ -179,10 +203,25 @@
       getImg(val){
         this.item.value = val[1];
       },
-
+      selectDepart(val){
+        this.departShow = false;
+        if(val && val !== 'cancel'){
+          this.item.value = val;
+          this.valueName = val.name;
+        }
+      },
+      selectStaff(val){
+        console.log(val)
+        this.staffShow = false;
+        if(val && val !== 'cancel'){
+          this.item.value = val;
+          this.valueName = val.name;
+        }
+      },
       openModal(){
 
       }
+
     }
   }
 </script>
@@ -212,9 +251,7 @@
       padding: 10px 15px;
     }
   }
-  .van-cell{
-    line-height: 24px;
-  }
+
   .aloneModel.required {
     .title {
       padding-left: .2rem;
@@ -222,5 +259,10 @@
         color: #f44;
       }
     }
+  }
+
+  .van-popup--right {
+    width: 100%;
+    height: 100%;
   }
 </style>

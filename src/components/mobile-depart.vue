@@ -25,6 +25,7 @@
         </ul>
       </div>
       <div class="footer">
+        <div @click="cancelAdd">取消</div>
         <div @click="confirmAdd" :class="{'isGray':!selectId}">确定</div>
       </div>
     </div>
@@ -91,38 +92,34 @@
           this.breadcrumbList.splice(index + 1, this.breadcrumbList.length);
         }
       },
-      // 开单人
-      organizeSure(name, id) {
-        this.form.id = id;
-        this.form.name = name;
-        this.$emit('organization', this.form, this.type);
-        this.onClose();
-      },
 
       selectItem(item) {
-        this.selectDepart.id = item.id;
-        this.selectDepart.name = item.name;
+        this.selectDepart = item;
+      },
+      cancelAdd(){
+        this.$emit('selectDepart','cancel')
       },
 
       confirmAdd() {
         if (this.selectId) {
          console.log(this.selectDepart)
+          this.$emit('selectDepart',this.selectDepart)
         } else {
           Toast.fail('请选择部门');
         }
       },
-      ddRent(urls, val) {
-        let that = this;
-        dd.biz.navigation.setLeft({
-          control: val,//是否控制点击事件，true 控制，false 不控制， 默认false
-          text: '',//控制显示文本，空字符串表示显示默认文本
-          onSuccess : function(result) {
-            that.$router.replace({path: urls, query: {tops: ''}});
-            that.ddRent(false);
-          },
-          onFail : function(err) {}
-        });
-      }
+      // ddRent(urls, val) {
+      //   let that = this;
+      //   dd.biz.navigation.setLeft({
+      //     control: val,//是否控制点击事件，true 控制，false 不控制， 默认false
+      //     text: '',//控制显示文本，空字符串表示显示默认文本
+      //     onSuccess : function(result) {
+      //       that.$router.replace({path: urls, query: {tops: ''}});
+      //       that.ddRent(false);
+      //     },
+      //     onFail : function(err) {}
+      //   });
+      // }
     },
   }
 </script>
@@ -148,7 +145,7 @@
     .breadcrumb_box {
       width: 100%;
       background: #F8F8F8;
-      padding: .25rem;
+      padding: .5rem;
       .breadcrumb {
         width: 100%;
         @include flex;
@@ -166,8 +163,8 @@
       height: 77%;
       overflow: auto;
       li {
-        height: .9rem;
-        padding: 0 .3rem;
+        height: 2.4rem;
+        padding: 0 .8rem;
         @include flex;
         align-items: center;
         border-bottom: 1px solid #f0f0f0;
@@ -194,17 +191,22 @@
       left: 0;
       right: 0;
       bottom: 0;
-      height: 1rem;
+      height: 2rem;
+      padding: .5rem 0;
+      display: flex;
       text-align: center;
       z-index: 666;
       background: #ffffff;
       border-top: 1px solid #efefef;
       div {
-        height: 1rem;
-        line-height: 1rem;
+        height: 2rem;
+        line-height: 2rem;
         width: 100% !important;
         text-align: center;
         color: #409EFF;
+        &:first-child{
+          border-right: 1px solid #409EFF
+        }
       }
     }
   }

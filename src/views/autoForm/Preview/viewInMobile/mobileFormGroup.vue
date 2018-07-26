@@ -82,6 +82,26 @@
         placeholder="请点击选择">
     </van-field>
 
+    <van-field
+        v-else-if="item.formItemList[colIndex].type==='staff'"
+        v-model="valueName"
+        @click="staffShow = true"
+        :label="item.formItemList[colIndex].label"
+        readonly
+        type="text"
+        placeholder="请点击选择">
+    </van-field>
+
+    <van-field
+        v-else-if="item.formItemList[colIndex].type==='depart'"
+        v-model="valueName"
+        @click="departShow = true"
+        :label="item.formItemList[colIndex].label"
+        readonly
+        type="text"
+        placeholder="请点击选择">
+    </van-field>
+
     <div v-else-if="item.formItemList[colIndex].type==='rate'" style="padding: 10px 15px;font-size: 14px;color: #333">
       <div style="display: inline-block;width:90px">
         {{item.formItemList[colIndex].label}}
@@ -119,15 +139,25 @@
           @cancel="onCancel"
           @confirm="onDate"/>
     </van-popup>
+
+    <van-popup :overlay-style="{'background':'rgba(255,255,255,1)'}" v-model="departShow" position="right" :close-on-click-overlay="false">
+      <MobileDepart @selectDepart="selectDepart"></MobileDepart>
+    </van-popup>
+
+    <van-popup :overlay-style="{'background':'rgba(255,255,255,1)'}" v-model="staffShow" position="right" :close-on-click-overlay="false">
+      <MobileStaff @selectStaff="selectStaff"></MobileStaff>
+    </van-popup>
   </div>
 </template>
 
 <script>
   import UpLoad from '../../../../components/UPLOAD-MOBILE'
+  import MobileDepart from '../../../../components/mobile-depart'
+  import MobileStaff from '../../../../components/mobile-staff'
 
   export default {
     name: "mobileFormList",
-    components: {UpLoad},
+    components: {UpLoad , MobileDepart , MobileStaff},
     props: {
       item: {
         type: Object,
@@ -146,6 +176,8 @@
       return{
         selectShow_user : false,
         selectShow_online : false,
+        departShow : false,
+        staffShow : false,
         timeShow : false,
         columns : [],
         currentDate : '',
@@ -188,7 +220,20 @@
       getImg(val){
         this.item.value[this.rowIndex][this.colIndex] = val[1];
       },
-
+      selectDepart(val){
+        this.departShow = false;
+        if(val && val !== 'cancel'){
+          this.item.value[this.rowIndex][this.colIndex] = val;
+          this.valueName = val.name;
+        }
+      },
+      selectStaff(val){
+        this.staffShow = false;
+        if(val && val !== 'cancel'){
+          this.item.value[this.rowIndex][this.colIndex] = val;
+          this.valueName = val.name;
+        }
+      },
       openModal(){
 
       }
@@ -230,7 +275,5 @@
       }
     }
   }
-  .van-cell{
-    line-height: 24px;
-  }
+
 </style>

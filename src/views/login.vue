@@ -108,10 +108,7 @@
         loading: false,
         underWay: true,      //登录中
         loadingNum: 60,
-        // ruleForm2: {
-        //   account: 'admin',
-        //   checkPass: '123456'
-        // },
+
         checked: true,
         isMessage: false,
         dingColor: false,

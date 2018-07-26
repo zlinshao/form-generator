@@ -185,7 +185,6 @@
         this.organizationDialog = true;
       },
       selectMember(val){
-
         this.item.value = val;
         this.item.valueName = '';
         val.forEach((item) =>{

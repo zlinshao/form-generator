@@ -23,12 +23,13 @@
             + {{item.operateName}}
           </div>
         </div>
-
         <div v-else>
           <MobileForm :item="item"></MobileForm>
         </div>
       </div>
     </van-cell-group>
+
+    <iframe src="" width="375" height="767" frameborder="0"></iframe>
   </div>
 </template>
 
@@ -65,9 +66,7 @@
 </script>
 
 <style scoped lang="scss">
-  .van-cell {
-    line-height: 15px !important;
-  }
+
   .formTitle{
     text-align: center;
     margin: 5px 0;
@@ -88,5 +87,8 @@
     .colors {
       color: #409EFF;
     }
+  }
+  .van-field__control {
+    line-height: inherit;
   }
 </style>

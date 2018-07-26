@@ -32,7 +32,6 @@
 </template>
 
 <script>
-// import EditorRules from '../editor-rules'
 import EditorOptions from '../editorOptions'
 export default {
   components: { EditorOptions },

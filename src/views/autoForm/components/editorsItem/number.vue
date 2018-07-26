@@ -10,12 +10,6 @@
       <el-form-item label="默认值">
         <el-input v-model="formItem.value"></el-input>
       </el-form-item>
-      <el-form-item label="最小值">
-        <el-input v-model="formItem.min"></el-input>
-      </el-form-item>
-      <el-form-item label="最大值">
-        <el-input v-model="formItem.max"></el-input>
-      </el-form-item>
       <el-form-item label="禁用">
         <el-switch v-model="formItem.disabled"></el-switch>
       </el-form-item>

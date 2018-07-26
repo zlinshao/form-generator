@@ -1,4 +1,3 @@
-/* eslint-disable */
 export default {
   "input": {
     "type": 'input', // 必要, String
@@ -12,8 +11,6 @@ export default {
     "type": 'number', // number 类型目前采用的是"输入前"限制, 使用rules验证会出现bug
     "label": '数字',
     "value": '',
-    "min": 0,
-    "max": 99998,
     "placeholder": '请输入数字',
   },
   "switch": {
