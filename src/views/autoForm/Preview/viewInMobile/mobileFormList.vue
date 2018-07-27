@@ -138,6 +138,7 @@
     <van-popup :overlay-style="{'background':'rgba(255,255,255,1)'}" v-model="staffShow" position="right" :close-on-click-overlay="false">
       <MobileStaff @selectStaff="selectStaff"></MobileStaff>
     </van-popup>
+
   </div>
 </template>
 
@@ -167,6 +168,7 @@
         minDate: new Date(2000, 0, 1),
         maxDate: new Date(2200, 12, 31),
         dateFormat : '',
+        valueName : '',
       }
     },
     methods:{
@@ -192,8 +194,8 @@
       openDate(){
         this.timeShow = true;
       },
-      monthDate(peaker){
-        this.dateFormat = peaker.getValues().join('-');
+        monthDate(peaker){
+          this.dateFormat = peaker.getValues().join('-');
       },
       onDate(peaker){
         this.item.value = this.dateFormat;
@@ -211,17 +213,12 @@
         }
       },
       selectStaff(val){
-        console.log(val)
         this.staffShow = false;
         if(val && val !== 'cancel'){
           this.item.value = val;
           this.valueName = val.name;
         }
       },
-      openModal(){
-
-      }
-
     }
   }
 </script>

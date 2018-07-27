@@ -74,16 +74,6 @@
 
     <van-field
         v-else-if="item.formItemList[colIndex].type==='staff'"
-        v-model="item.valueName"
-        @click="openModal()"
-        :label="item.formItemList[colIndex].label"
-        readonly
-        type="text"
-        placeholder="请点击选择">
-    </van-field>
-
-    <van-field
-        v-else-if="item.formItemList[colIndex].type==='staff'"
         v-model="valueName"
         @click="staffShow = true"
         :label="item.formItemList[colIndex].label"
@@ -184,6 +174,7 @@
         minDate: new Date(2000, 0, 1),
         maxDate: new Date(2200, 12, 31),
         dateFormat : '',
+        valueName : '',
       }
     },
     methods:{
@@ -234,9 +225,6 @@
           this.valueName = val.name;
         }
       },
-      openModal(){
-
-      }
     }
   }
 </script>
